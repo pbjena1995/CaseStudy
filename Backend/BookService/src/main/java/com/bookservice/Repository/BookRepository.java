@@ -5,8 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.bookservice.entity.Book;
 
-
 @Repository
-public interface BookRepository extends JpaRepository<Book,Integer>{
+public interface BookRepository extends JpaRepository<Book, Integer> {
+	Boolean existsByBookname(String bookName);
 
+	Book findByBookname(String bookName);
 }
