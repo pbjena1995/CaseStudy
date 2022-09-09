@@ -22,7 +22,7 @@ import com.bookservice.entity.Book;
 @CrossOrigin
 @RestController
 @RequestMapping("/book")
-public class BookController {
+public class BookController extends BaseExceptionHandler{
 	@Autowired
 	private BookRepository bookRepository;
 

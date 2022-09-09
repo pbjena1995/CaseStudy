@@ -17,7 +17,7 @@ import com.authorservice.repository.AuthorRepository;
 @CrossOrigin
 @RestController
 @RequestMapping("/author")
-public class AuthController {
+public class AuthController extends BaseExceptionHandler{
 	@Autowired
 	AuthorRepository authorRepository;
 
