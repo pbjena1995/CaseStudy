@@ -1,0 +1,31 @@
+<div>
+    <mat-toolbar color="primary">
+        <div>
+            <mat-icon style="margin-right:7px">book</mat-icon>
+            <span>Digital Book</span>
+        </div>
+        <span class="tool-barspace"></span>
+        <div class="toolbar-right">   
+            <mat-menu #authorDashBoardMenu="matMenu">
+                <a mat-icon-button routerLink="/authordashboard">Books</a><br>
+                <a mat-icon-button routerLink="/add-book">Add Book</a>
+            </mat-menu>
+            <a *ngIf="isLoggedIn" mat-icon-button style="margin-right:10px" [matMenuTriggerFor]="authorDashBoardMenu">Menu</a>
+            <a *ngIf="isLoggedIn" style="margin-right:10px" mat-icon-button (click)="userLogout()">Logout</a>
+            <a *ngIf="!isLoggedIn" style="margin-right:10px" mat-icon-button routerLink="/home">Home</a>
+            <mat-menu #authorMenu="matMenu">
+                <a mat-icon-button routerLink="/login">Login</a><br>
+                <a mat-icon-button routerLink="/signup">Register</a>
+            </mat-menu>
+            <a *ngIf="!isLoggedIn" mat-icon-button style="margin-right:10px" [matMenuTriggerFor]="authorMenu">Author</a>
+           <!-- <a style="margin-right:10px" mat-icon-button routerLink="/login">Author</a>-->
+           <mat-menu #readerMenu="matMenu">
+            <a mat-icon-button routerLink="/purchasedbook">Buyed Books</a><br>
+            <a mat-icon-button routerLink="/reader">Books</a>
+        </mat-menu>
+        <a *ngIf="!isLoggedIn" mat-icon-button style="margin-right:10px" [matMenuTriggerFor]="readerMenu">Reader</a>
+             <!--<a style="margin-right:10px" mat-icon-button routerLink="/home">Reader</a>-->
+        </div>
+    </mat-toolbar>
+</div>
+

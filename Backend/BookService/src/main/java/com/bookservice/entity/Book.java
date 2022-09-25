@@ -11,14 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-@Table(uniqueConstraints = { @UniqueConstraint(columnNames = "bookname") })
 public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,13 +35,14 @@ public class Book {
 	@Column(nullable = false)
 	private float price;
 	@NotBlank(message = "Author Name Cannot Be Blank")
-	private String author_name;
+	private String authorname;
 	@NotBlank(message = "Book Publisher Cannot Be Blank")
 	private String publisher;
 	private Date publish_date;
 	@NotBlank(message = "Book Content Cannot Be Blank")
+	@Size(max=2000)
 	private String contents;
 	// status 'Y' means active & 'N' means not active
-	private Character status;
+	private String status;
 
 }

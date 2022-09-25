@@ -1,29 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-    <div class="global-container">
-        <div class="card login-form">
-            <div class="card-body">
-                <h1 class="card-title text-center">Signup</h1>
-                <div class="card-text">
-                    <form class="form-class">
-                        <div class="form-group">
-                            <label for="nameaddress">Enter Name</label>
-                            <input type="text" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group">
-                            <label for="emailaddress">Enter Email</label>
-                            <input type="email" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group">
-                            <label for="passwordaddress">Enter Password</label>
-                            <input type="password" class="form-control form-control-sm">
-                        </div>
-                      <button type="submit" class="btn btn-primary btn-lg" routerLink="/addbook">Signup</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+<mat-card>
+  <mat-card-content>
+    <div class="header">
+      <h2>SIGNUP</h2>
     </div>
-</body>
-</html>
+    <form (ngSubmit)="register()" name="signupForm" [formGroup]="signupForm">
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Username</mat-label>
+                <input formControlName="username" [(ngModel)]="signup.username" 
+                matInput name="username" required>
+                <mat-error *ngIf="myError('username', 'required')">Username is required.</mat-error>
+                <mat-error *ngIf="myError('username', 'maxlength')">Exceed Max Limit 20.</mat-error>
+            </mat-form-field>     
+        </div>
+        <div>
+          <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" [(ngModel)]="signup.email" 
+              matInput name="email" required>
+              <mat-error *ngIf="myError('email', 'required')">Email is required.</mat-error>
+              <mat-error *ngIf="myError('email', 'maxlength')">Exceed Max Limit 30.</mat-error>
+          </mat-form-field>     
+      </div>
+      <div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" [(ngModel)]="signup.password" 
+            matInput name="password" type="password" required>
+            <mat-error *ngIf="myError('password', 'required')">Password is required.</mat-error>
+            <mat-error *ngIf="myError('password', 'maxlength')">Exceed Max Limit 10.</mat-error>
+        </mat-form-field>     
+    </div>
+    <span *ngIf="signUpError" style="color:red">User Already Exist !!!</span><br><br>
+      <button mat-raised-button color="primary">Submit</button>
+      
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,22 @@
+<div class="main-div"> 
+    Available Books
+ </div>
+    <div >
+        <mat-card class="example-card" *ngFor="let data of getBookData" style="background-color: rgb(231, 236, 240);">
+            <mat-card-title >{{data.bookname}}</mat-card-title>
+            <mat-card-subtitle>Book Title : {{data.title}}</mat-card-subtitle>
+            <mat-card-content class="card-content">
+              Author Name : {{data.authorname}}<br>
+              Publisher : {{data.publisher}}<br>
+              Category : {{data.category}}<br>
+              Book Status : {{data.status}} <br>
+              Book Price : {{data.price}}<br>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" (click)="updateStatus(data.id)">Change Status</button>
+              <button mat-raised-button color="primary" (click)="editButtonClick(data)">Edit</button>
+            
+            </mat-card-actions>
+        </mat-card>
+    </div>
+

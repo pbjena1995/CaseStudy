@@ -1,41 +1,14 @@
-html,
-body{
-    height: 100%;
-    background-color: #404e55 !important;
+mat-card{
+    max-width: 400px;
+    margin:2em auto;
+    text-align: center;
+    max-height: 600px; 
 }
 
-.global-container{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #0db8de;
+.header{
+    text-align: center; 
 }
 
-.form-class{
-    padding-top: 20px;
-    font-size: 17px;
-    margin-top: 10px;
-    line-height: 50px;
+.full-width{
+    width: 80%;
 }
-
-.login-form{
-    width: 380px;
-    height: 450px;
-    margin: 20px;
-    background: #1a2226;
-    border-radius: 10px !important;
-}
-.card-title{
-    font-weight: 700;
-    padding-top: 10px;
-}
-
-.btn{
-    background: #0db8de;
-    margin-top: 25px;
-    margin-left: 120px;
-    color: rgb(10, 10, 20);
-   
-}
-

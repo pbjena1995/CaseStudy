@@ -1,0 +1,25 @@
+<h1 mat-dialog-title style="text-align: center;">Enter Your Details</h1>
+<div mat-dialog-content>
+    <form name="buyBookForm" [formGroup]="buyBookForm">
+    <div style="margin-left:25px">
+        <mat-form-field class="full-width" style="margin-right:25px" appearance="outline">
+          <mat-label>Enter Name</mat-label>
+          <input [(ngModel)]="buyBookData.name" formControlName="name"
+          matInput name="name" required>
+          <mat-error *ngIf="myError('name', 'required')">Name is required.</mat-error>
+       </mat-form-field>   
+      </div>
+      <div style="margin-left:25px">
+        <mat-form-field class="full-width" style="margin-right:25px" appearance="outline">
+          <mat-label>Enter Email</mat-label>
+          <input [(ngModel)]="buyBookData.email" formControlName="email"
+          matInput name="name" required>
+          <mat-error *ngIf="myError('email', 'required')">Email is required.</mat-error>
+       </mat-form-field>   
+      </div>
+    </form>
+</div>
+<div mat-dialog-action style="margin-left:25px">
+    <button style="margin-right:50px" mat-raised-button color="primary" (click)="buyBook()">Submit</button>
+    <button mat-raised-button mat-dialog-close color="warn">Close</button>
+  </div>

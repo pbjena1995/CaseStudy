@@ -1,0 +1,22 @@
+.spacer{
+    margin-top: 40px;
+    margin-left: 500px;
+}
+.main-div{
+    margin-top: 50px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: #11af53;
+  }
+  
+  .example-card {
+    max-width: 250px;
+    margin-top: 50px;
+    margin-left: 30px;
+    text-align: center;
+    float: left;
+  }
+  .card-content{
+    text-align: left;
+  }

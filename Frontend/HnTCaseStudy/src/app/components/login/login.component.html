@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-content>
+    <div class="header">
+      <h2>LOGIN</h2>
+    </div>
+    <form (ngSubmit)="loginCall()" name="loginForm" [formGroup]="loginForm">
+        <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Username</mat-label>
+                <input formControlName="username" [(ngModel)]="user.username" 
+                matInput name="username" required>
+                <mat-error *ngIf="myError('username', 'required')">Username is required.</mat-error>
+                <mat-error *ngIf="myError('username', 'maxlength')">Exceed Max Limit 20.</mat-error>
+            </mat-form-field>     
+        </div>
+        <div>
+          <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Password</mat-label>
+              <input formControlName="password" [(ngModel)]="user.password" 
+              matInput name="username" type="password" required>
+              <mat-error *ngIf="myError('password', 'required')">Password is required.</mat-error>
+                <mat-error *ngIf="myError('password', 'maxlength')">Exceed Max Limit 10.</mat-error>
+          </mat-form-field>
+      </div>
+      <span *ngIf="loginError" style="color:red">Bad Credential !!!</span><br><br>
+      <button mat-raised-button color="primary">Submit</button>
+      
+    </form>
+  </mat-card-content>
+</mat-card>

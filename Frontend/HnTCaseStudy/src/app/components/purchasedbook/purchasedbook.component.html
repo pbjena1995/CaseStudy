@@ -1,0 +1,34 @@
+<div class="main-div"> 
+  Please Enter Email To See All Purchased Books
+</div>
+
+<div class="spacer">
+        <form >
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Email</mat-label>
+                <input [(ngModel)]="searchData.email" 
+                matInput name="username" required>
+            </mat-form-field>
+            <button style="margin-left:20px" mat-raised-button (click)="purchasedBooks()">Search</button>
+        </form> 
+        <span *ngIf="buyBookError" style="color:red">Books Not Available !!!</span><br><br>
+        
+</div>
+
+<div>
+    <mat-card class="example-card" *ngFor="let data of purchasedBookData" style="background-color: rgb(231, 236, 240);">
+        <mat-card-title>{{data.bookname}}</mat-card-title>
+        <mat-card-subtitle>Book Title : {{data.title}}</mat-card-subtitle>
+        <mat-card-content class="card-content">
+          Author Name : {{data.authorname}}<br>
+          Publisher : {{data.publisher}}<br>
+          Category : {{data.category}}<br>
+          Book Status : {{data.status}} <br>
+          Book Price : {{data.price}}<br>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="readBook(data)">Read Book</button>
+          <button mat-raised-button color="primary" (click)="refundBook(data.id)">Refund</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

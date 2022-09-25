@@ -7,10 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'HnTCaseStudy';
-  bookIcon:string="assets/images/logo3.png";
-
-  flag=true;
-  tuggle(){
-      this.flag=!this.flag;
-  }
 }

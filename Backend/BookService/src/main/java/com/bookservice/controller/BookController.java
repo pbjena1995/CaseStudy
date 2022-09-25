@@ -1,7 +1,9 @@
 package com.bookservice.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bookservice.Repository.BookRepository;
 import com.bookservice.entity.Book;
+import com.bookservice.entity.BookCategory;
 
 @CrossOrigin
 @RestController
@@ -28,24 +31,24 @@ public class BookController extends BaseExceptionHandler{
 
 	@PostMapping()
 	public ResponseEntity<?> createBook(@Valid @RequestBody Book book) {
-		if (bookRepository.existsByBookname(book.getBookname())) {
-			return ResponseEntity.badRequest().body(book.getBookname() + " Is Already Present !!!");
+		if (bookRepository.existsByBooknameAndAuthorname(book.getBookname(),book.getAuthorname())) {
+			return ResponseEntity.badRequest().body("Book Is Already Present !!!");
 		}
-		book.setStatus('Y');
+		book.setStatus("ACTIVE");
 		Date date = new Date();
 		book.setPublish_date(date);
+		book.setImage("D:/Image");
 		bookRepository.save(book);
 		return ResponseEntity.ok("Book Is Created Successfully:" + book.getBookname());
 	}
 
 	@PutMapping()
 	public ResponseEntity<?> updateBook(@Valid @RequestBody Book book) {
-		if (!bookRepository.existsByBookname(book.getBookname())) {
-			return ResponseEntity.badRequest().body(book.getBookname() + "  Is Not Present !!!");
-		}
-		Book bookResult = bookRepository.findByBookname(book.getBookname());
+		Book bookResult = bookRepository.findById(book.getId()).get();
 		book.setId(bookResult.getId());
 		book.setPublish_date(bookResult.getPublish_date());
+		book.setImage(bookResult.getImage());
+		book.setContents(bookResult.getContents());
 		book.setStatus(bookResult.getStatus());
 		bookRepository.save(book);
 		return ResponseEntity.ok("Book Is Updated Successfully:" + book.getBookname());
@@ -56,6 +59,18 @@ public class BookController extends BaseExceptionHandler{
 		List<Book> findAll = bookRepository.findAll();
 		return ResponseEntity.ok(findAll);
 	}
+	
+	@GetMapping("/activebook")
+	public ResponseEntity<?> getActiveBook() {
+		List<Book> findAll = bookRepository.findAll();
+		List<Book> list=new ArrayList<>();
+		for(Book book:findAll) {
+			if(book.getStatus().equals("ACTIVE")) {
+				list.add(book);
+			}
+		}
+		return ResponseEntity.ok(list);
+	}
 
 	@GetMapping("/{name}")
 	public ResponseEntity<?> getBookByName(@PathVariable("name") String bookName) {
@@ -65,18 +80,60 @@ public class BookController extends BaseExceptionHandler{
 		return ResponseEntity.ok(bookRepository.findByBookname(bookName));
 	}
 
-	@PutMapping("/{name}/{author}/{status}")
-	public ResponseEntity<?> updateStatus(@PathVariable("name") String bookName,
-			@PathVariable("author") String authorName, @PathVariable("status") Character status) {
-		Book findByBookname = bookRepository.findByBookname(bookName);
-		if (findByBookname == null) {
-			return ResponseEntity.badRequest().body(bookName + "  Is Not Present !!!");
+	@PutMapping("/{bookId}")
+	public ResponseEntity<?> updateStatus(@PathVariable("bookId") int bookId) {
+		 Book findById = bookRepository.findById(bookId).get();
+		if (findById == null) {
+			return ResponseEntity.badRequest().body("Book Is Not Present !!!");
 		}
-		if (!findByBookname.getAuthor_name().equals(authorName)) {
-			return ResponseEntity.badRequest().body("Author Is Not Authorised To Change The Status Of The Book");
+		String status = findById.getStatus();
+		System.out.println("Book Status-"+status);
+		String updateStatus="";
+		if(status.equalsIgnoreCase("ACTIVE")) {
+			updateStatus="INACTIVE";
 		}
-		findByBookname.setStatus(status);
-		bookRepository.save(findByBookname);
+		else {
+			updateStatus="ACTIVE";
+		}
+		System.out.println("Book Update Status-"+updateStatus);
+		findById.setId(bookId);
+		findById.setStatus(updateStatus);
+		bookRepository.save(findById);
 		return ResponseEntity.ok("Status Is Updated Successfully !!!");
+	}
+	
+	@GetMapping("category/{category}")
+	public ResponseEntity<?> getBookByCategory(@PathVariable("category") BookCategory category){
+		System.out.println("Inside getBookByCategory !!!");
+		List<Book> findByCategory = bookRepository.findByCategory(category);
+		if(findByCategory == null) {
+			return ResponseEntity.badRequest().body("No Results Found !!!");
+		}
+		return ResponseEntity.ok(findByCategory);
+	}
+	@GetMapping("author/{author}")
+	public ResponseEntity<?> getBookByAuthor(@PathVariable("author") String author){
+		System.out.println("Inside getBookByAuthor !!!");
+		List<Book> findByAuthor = bookRepository.findByAuthorname(author);
+		if(findByAuthor == null) {
+			return ResponseEntity.badRequest().body("No Results Found !!!");
+		}
+		return ResponseEntity.ok(findByAuthor);
+	}
+	@GetMapping("price/{price}")
+	public ResponseEntity<?> getBookByPrice(@PathVariable("price") float price){
+		List<Book> findByPrice = bookRepository.findByPrice(price);
+		if(findByPrice == null) {
+			return ResponseEntity.badRequest().body("No Results Found !!!");
+		}
+		return ResponseEntity.ok(findByPrice);
+	}
+	@GetMapping("publisher/{publisher}")
+	public ResponseEntity<?> getBookByPublisher(@PathVariable("publisher") String publisher){
+		List<Book> findByPublisher = bookRepository.findByPublisher(publisher);
+		if(findByPublisher == null) {
+			return ResponseEntity.badRequest().body("No Results Found !!!");
+		}
+		return ResponseEntity.ok(findByPublisher);
 	}
 }

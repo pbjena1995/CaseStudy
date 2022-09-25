@@ -1,1 +1,40 @@
-<p>reader works!</p>
+
+ <div class="spacer">
+  <form >
+    <mat-form-field class="full-width" style="margin-right:20px"  appearance="outline">
+      <mat-label>Select Category</mat-label>
+      <mat-select [(ngModel)]="searchBookData.category" name="category" required>
+        <mat-option>Select</mat-option>
+        <mat-option value="AUTHOR">Author</mat-option>
+        <mat-option value="CATEGORY">Category</mat-option>
+        <mat-option value="PUBLISHER">Publisher</mat-option>
+      </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Enter Value</mat-label>
+          <input [(ngModel)]="searchBookData.value"
+          matInput name="value" required>
+      </mat-form-field>
+      <button style="margin-left:20px" mat-raised-button (click)="searchBookByCategory()">Search</button>
+  </form> 
+  
+</div>
+<div class="main-div"> 
+  Available Books
+</div>
+    <div>
+        <mat-card class="example-card" *ngFor="let data of getBookData" style="background-color: rgb(231, 236, 240);">
+            <mat-card-title>{{data.bookname}}</mat-card-title>
+            <mat-card-subtitle>Book Title : {{data.title}}</mat-card-subtitle>
+            <mat-card-content class="card-content">
+              Author Name : {{data.authorname}}<br>
+              Publisher : {{data.publisher}}<br>
+              Category : {{data.category}}<br>
+              Book Status : {{data.status}} <br>
+              Book Price : {{data.price}}<br>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="primary" (click)="buyBook(data.id)">Buy</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>

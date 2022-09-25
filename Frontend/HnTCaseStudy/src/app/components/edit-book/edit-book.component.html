@@ -1,0 +1,63 @@
+<h1 mat-dialog-title style="text-align: center;">Edit Book</h1>
+<div mat-dialog-content>
+  <form name="editBookForm" [formGroup]="editBookForm">
+    <div class="row" style="margin-left:20px">
+      <mat-form-field class="full-width" style="margin-right:20px" appearance="outline">
+        <mat-label>Bookname</mat-label>
+        <input  [(ngModel)]="editbookdata.bookname" formControlName="bookname"
+        matInput name="bookname" required>
+        <mat-error *ngIf="myError('bookname', 'required')">Bookname is required.</mat-error>
+     </mat-form-field> 
+     <mat-form-field class="full-width" style="margin-right:20px"  appearance="outline">
+        <mat-label>Title</mat-label>
+        <input [(ngModel)]="editbookdata.title" formControlName="title"
+        matInput name="title" required>
+        <mat-error *ngIf="myError('title', 'required')">Title is required.</mat-error>
+     </mat-form-field>
+     <mat-form-field class="full-width" style="margin-right:20px"  appearance="outline">
+        <mat-label>Select Category</mat-label>
+        <mat-select formControlName="category" [(ngModel)]="editbookdata.category">
+          <mat-option>Select</mat-option>
+          <mat-option value="ACTION">Action</mat-option>
+          <mat-option value="CS">CS</mat-option>
+          <mat-option value="COMIC">Comic</mat-option>
+          <mat-option value="HISTORYCAL">Historical</mat-option>
+        </mat-select>
+        <mat-error *ngIf="myError('category', 'required')">Category is required.</mat-error>
+   </mat-form-field>    
+    </div>
+    <div class="row" style="margin-left:20px">
+      <mat-form-field class="full-width" style="margin-right:20px" appearance="outline">
+        <mat-label>Price</mat-label>
+        <input  type="number" [(ngModel)]="editbookdata.price" formControlName="price"
+        matInput name="price" required>
+        <mat-error *ngIf="myError('price', 'required')">Price is required.</mat-error>
+     </mat-form-field> 
+     <mat-form-field class="full-width" style="margin-right:20px"  appearance="outline">
+        <mat-label>Author</mat-label>
+        <input [(ngModel)]="editbookdata.authorname" formControlName="authorname"
+        matInput name="author" required>
+        <mat-error *ngIf="myError('authorname', 'required')">Author is required.</mat-error>
+     </mat-form-field>
+     <mat-form-field class="full-width" style="margin-right:20px"  appearance="outline">
+        <mat-label>Publisher</mat-label>
+        <input [(ngModel)]="editbookdata.publisher" formControlName="publisher"
+        matInput name="publisher" required>
+        <mat-error *ngIf="myError('publisher', 'required')">Publisher is required.</mat-error>
+   </mat-form-field>    
+    </div>
+    <div class="row" style="margin-left:20px">
+      <mat-form-field class="full-width" style="margin-right:20px" appearance="outline">
+        <mat-label>Contents</mat-label>
+        <textarea [(ngModel)]="editbookdata.contents" formControlName="contents"
+        matInput name="content" required></textarea>
+        <mat-error *ngIf="myError('contents', 'required')">Contents is required.</mat-error>
+     </mat-form-field>   
+    </div>
+  </form>
+
+</div>
+<div mat-dialog-action style="margin-left:250px">
+  <button style="margin-right:50px" mat-raised-button color="primary" (click)="editBookSave()">Save</button>
+  <button mat-raised-button mat-dialog-close color="warn">Close</button>
+</div>

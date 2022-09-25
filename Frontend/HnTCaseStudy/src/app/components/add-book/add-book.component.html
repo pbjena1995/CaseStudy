@@ -1,0 +1,80 @@
+<mat-card>
+  <mat-card-content>
+    <div class="header">
+      <h2>ADD BOOK</h2>
+    </div>
+    <form (ngSubmit)="saveBook()" name="addBookForm" [formGroup]="addBookForm">
+     
+      <div>
+            <mat-form-field class="full-width" appearance="outline">
+                <mat-label>Bookname</mat-label>
+                <input formControlName="bookname" [(ngModel)]="addbookdata.bookname" 
+                matInput name="bookname" required>
+                <mat-error *ngIf="myError('bookname', 'required')">Bookname is required.</mat-error>
+              
+            </mat-form-field>     
+        </div>
+        <div>
+          <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Title</mat-label>
+              <input formControlName="title" [(ngModel)]="addbookdata.title" 
+              matInput name="title" required>
+              <mat-error *ngIf="myError('title', 'required')">Title is required.</mat-error>
+             
+          </mat-form-field>     
+      </div>
+    
+      <div>
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Select Category</mat-label>
+            <mat-select formControlName="category" [(ngModel)]="addbookdata.category">
+              <mat-option>Select</mat-option>
+              <mat-option value="ACTION">Action</mat-option>
+              <mat-option value="CS">CS</mat-option>
+              <mat-option value="COMIC">Comic</mat-option>
+              <mat-option value="HISTORYCAL">Historical</mat-option>
+            </mat-select>
+            <mat-error *ngIf="myError('category', 'required')">Category is required.</mat-error>
+        </mat-form-field>     
+    </div>
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Price</mat-label>
+          <input type="number" formControlName="price" [(ngModel)]="addbookdata.price" 
+          matInput name="price" required>
+          <mat-error *ngIf="myError('price', 'required')">Price is required.</mat-error>
+         
+      </mat-form-field>     
+    </div>
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Author</mat-label>
+          <input formControlName="authorname" [(ngModel)]="addbookdata.authorname" 
+          matInput name="authorname" required>
+          <mat-error *ngIf="myError('authorname', 'required')">Author is required.</mat-error>
+         
+      </mat-form-field>     
+    </div>
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Publisher</mat-label>
+          <input formControlName="publisher" [(ngModel)]="addbookdata.publisher" 
+          matInput name="publisher" required>
+          <mat-error *ngIf="myError('publisher', 'required')">Publisher is required.</mat-error>
+         
+      </mat-form-field>     
+    </div>
+    <div>
+      <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Content</mat-label>
+          <textarea formControlName="contents" [(ngModel)]="addbookdata.contents" 
+          matInput name="contents" required></textarea>
+          <mat-error *ngIf="myError('contents', 'required')">Content is required.</mat-error>
+      </mat-form-field>     
+    </div>
+    <span *ngIf="addBookError" style="color:red">Book Is Already Present !!!</span><br><br>
+      <button mat-raised-button color="primary">Save</button>
+      
+    </form>
+  </mat-card-content>
+</mat-card>
